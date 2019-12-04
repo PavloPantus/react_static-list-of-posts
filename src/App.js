@@ -1,29 +1,29 @@
 import React from 'react';
+import PostList from './PostList';
 
-import './App.css';
+import './App.scss';
 
 import posts from './api/posts';
 import comments from './api/comments';
 import users from './api/users';
 
+const preparedPosts = (postsToPrepare, commentsToPrepare, usersToPrepare) => (
+  postsToPrepare.map(
+    post => (
+      {
+        ...post,
+        postAuthor: usersToPrepare.find(user => user.id === post.userId),
+        postComments:
+          commentsToPrepare.filter(Comment => Comment.postId === post.id),
+      }
+    )
+  )
+);
+
 const App = () => (
   <div className="App">
     <h1>Static list of posts</h1>
-
-    <p>
-      <span>posts: </span>
-      {posts.length}
-    </p>
-
-    <p>
-      <span>comments: </span>
-      {comments.length}
-    </p>
-
-    <p>
-      <span>Users: </span>
-      {users.length}
-    </p>
+    <PostList posts={preparedPosts(posts, comments, users)} />
   </div>
 );
 
