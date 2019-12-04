@@ -7,7 +7,7 @@ const PostList = ({ posts }) => (
     {
       posts.map(
         post => (
-          <Post {...post} />
+          <Post {...post} key={post.id} />
         )
       )
     }

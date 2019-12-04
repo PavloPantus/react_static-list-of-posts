@@ -5,7 +5,10 @@ import Comment from './Comment';
 const CommentList = ({ allComments }) => (
   <section className="post__comments">
     <p>comments</p>
-    {allComments.map(comment => <Comment newComment={comment} />)}
+    {allComments.map(
+      comment => <Comment newComment={comment} key={comment.id} />
+    )
+    }
   </section>
 );
 
